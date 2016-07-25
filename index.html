@@ -22,9 +22,20 @@
             </h3>
         </div>
         
-        <div ng-controller="listCtrl as list">
+        <div ng-controller="listCtrl as list" ng-hide="list.quizMetrics.quizActive">
+           <form class="form-inline well well-sm clearfix danger">
+               <span class="glyphicon glyphicon-search"></span>
+               <input 
+                      type="text"
+                      placeholder="Search..."
+                      class="form-control"
+                      ng-model="list.search">
+               <button class="btn btn-success pull-right" ng-click="list.activateQuiz()">
+               <strong>Start Quiz</strong>
+               </button>
+           </form>
            <div class="row">
-                <div class="col-sm-6" ng-repeat="turtle in list.data">
+                <div class="col-sm-6" ng-repeat="turtle in list.data | filter:list.search">
                     <div class="well well-sm">
                         <div class="row">
                             <div class="col-md-6">
@@ -58,24 +69,28 @@
                                         <img ng-src="{{list.activeTurtle.image_url}}" class="img-rounded img-responsive">
                                     </div>
                             </div>
-                                <div class="row top-buffer">
-                                        <div class="col-md-6">
-                                            <p><strong>Location:</strong>  {{list.activeTurtle.locations}}</p>
-                                            <p><strong>Size:</strong> {{list.activeTurtle.size}}</p>
-                                            <p><strong>Average Lifespan</strong> {{list.activeTurtle.lifespan}}</p>
-                                            <p><strong>Diet:</strong> {{list.activeTurtle.diet}}</p>
-                                        </div>
-                                        <div class="col-xs-12 top-buffer">
-                                            <p><strong>Description:</strong> {{list.activeTurtle.description}}</p>
-                                            <button class="btn btn-danger pull-right" data-dismiss="modal">Close</button>
-                                        </div>
+                            <div class="row top-buffer">
+                                <div class="col-md-6">
+                                    <p><strong>Location:</strong>  {{list.activeTurtle.locations}}</p>
+                                    <p><strong>Size:</strong> {{list.activeTurtle.size}}</p>
+                                    <p><strong>Average Lifespan</strong> {{list.activeTurtle.lifespan}}</p>
+                                    <p><strong>Diet:</strong> {{list.activeTurtle.diet}}</p>
+                                </div>
+                                <div class="col-xs-12 top-buffer">
+                                    <p><strong>Description:</strong> {{list.activeTurtle.description}}</p>
+                                    <button class="btn btn-danger pull-right" data-dismiss="modal">Close</button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <p><strong> {{list.footer}}</strong></p>
-        </div>
+            <!-- <p><strong> {{list.footer}}</strong></p> -->
+        </div><!-- List Controller -->
+            <div ng-controller="quizCtrl as quiz" ng-show="quiz.quizMetrics.quizActive">
+            <h1>Quiz</h1>
+            </div>
+           
     </div>
  
     <!-- third party js -->
@@ -85,7 +100,10 @@
  
     <!-- Our application scripts -->
     <script src="js/app.js"></script>
-    <script src="controllers/list.js"></script>
+    <script src="js/controllers/list.js"></script>
+    <script src="js/controller/quiz.js"></script>
+    <script src="js/factories/quizMetrics.js"></script>
+    <script src="js/factories/dataservice.js"></script>
 </body>
 </html>
  
