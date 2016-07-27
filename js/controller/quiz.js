@@ -11,6 +11,6 @@
                 var vm = this;
                 
                 vm.quizMetrics = quizMetrics;
-            
+                vm.dataService = DataService;
             }
  })();
