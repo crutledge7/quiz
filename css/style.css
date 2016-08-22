@@ -33,3 +33,11 @@ body{background: lightgrey;}
     width: 100%;
     height: auto;   
 }
+.image-selected{
+    border: 4px solid #bbb;  
+    border-radius: 10px;
+}
+.image-selected:hover{
+    border: 4px solid red; 
+    cursor: pointer;
+}
